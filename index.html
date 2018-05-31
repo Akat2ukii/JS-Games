@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+    <head>
+
+    </head>
+    <body>
+        <div id="game">
+        <h1>The Psychic Game</h1>
+        <p>Guess what letter I'm thinking of!</p>
+        <p>Total Wins: </p>
+        <p>Total Losses: </p>
+        <p>Guesses Left: </p>
+        <p>Your Guesses so far: </p>
+        </div>
+
+    <script type="text/javascript">
+        // Creates an array that lists out all of the options
+        var computerChoices = ["a", "s", "d","f","g","h","j","k","l","q","w","e","r","t","y","u","i","o","p","z","x","c","v","b","n","m"];
+        // Creating variables to hold the number of wins, losses, gusses, and gusses so far
+        var wins = 0;
+        var losses = 0;
+        var guesses = 9;
+        var guessesSoFar = [];
+        // Key listner for the event function
+        document.onkeyup = function(event) {
+            // Determines which key was pressed
+            var userGuess = event.key;
+            // Randomly chooses a choice from the options array. This is the Computer's guess
+            var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+            // Putting guesses into gussesSoFar
+            guessesSoFar.push(userGuess);  
+    
+            if (userGuess === computerGuess) 
+            {
+            wins++;
+            //Reset
+            guesses = 9; 
+            guessesSoFar.length = 0;
+            alert("Gratz! You Won!");
+            }
+            else if (guesses === 0)
+            {
+            losses++;
+            alert("Nope, try again!");
+            guesses = 9;
+            guessesSoFar.length = 0;
+            }
+            else if (userGuess !== computerGuess)
+            {
+            guesses--;
+            }
+           
+            var html = "<h1>The Psychic Game</h1>" + 
+            "<p>Guess what letter I'm thinking of!</p>" +
+            "<p>Total Wins: " + wins + "</p>" +
+            "<p>Total Losses: " + losses + "</p>" +
+            "<p>Guesses Left: " + guesses + "</p>" +
+            "<p>Your Guesses so far: " +guessesSoFar +"</p>";
+            
+            document.querySelector('#game').innerHTML = html;      
+        }
+        
+    </script>
+    </body>
+</html>
